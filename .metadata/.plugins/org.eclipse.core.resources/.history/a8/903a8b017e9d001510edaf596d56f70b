@@ -1,0 +1,114 @@
+package tools.loadData;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import trajectory.construct.Point;
+
+public class InputData {
+	/**
+	 * 
+	 * @param file
+	 */
+	public static List<Point> input_file(String file, int flag){
+		int index = 0;
+		List<Point> points = new ArrayList<>();
+		BufferedReader bfr = null;
+		if(flag == 0){
+			try {
+				
+				//jump the head
+				bfr = new BufferedReader(new FileReader(file));
+				
+				for(int i = 0 ; i < 6; i++){
+					bfr.readLine();
+				}
+				
+				String line = null;
+				String regex = ",";
+				while((line = bfr.readLine()) != null){
+					String[] data  = line.split(regex);
+					double x = Double.parseDouble(data[0]);
+					double y = Double.parseDouble(data[1]);
+					Point point = new Point(x, y, index++);
+					points.add(point);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally{
+				try {
+					bfr.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		}else if(flag == 1){
+			try {
+				bfr = new BufferedReader(new FileReader(file));
+				String line = null;
+				String regex = ",";
+				while((line = bfr.readLine()) != null){
+					String[] data  = line.split(regex);
+					double x = Double.parseDouble(data[data.length - 2]);
+					double y = Double.parseDouble(data[data.length - 1]);
+					Point point = new Point(x, y, index++);
+					points.add(point);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally{
+				try {
+					bfr.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		}
+		
+		return points;
+	}
+	
+		/**
+		 * output the result into file
+		 * @param file is output file
+		 * @param result is the result trajectory
+		 */
+	public static void output_file(String file, List<Point> result){
+		BufferedWriter bfw = null;
+		try {
+			bfw = new BufferedWriter(new FileWriter(new File(file)));
+			for(int i = 0 ; i < result.size() ; i++){
+				Point point = result.get(i);
+				//bfw.write(point.getIndex()+","+point.getX()+","+point.getY() + "\r\n");
+				bfw.write(point.getX()+","+point.getY() + "\r\n");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				bfw.close();
+			} catch (Exception e2) {
+					e2.printStackTrace();
+			}
+		}
+	}
+ 
+	/**
+	 * print the result
+	 * @param points is the trajectory's points
+	*/
+	public static void print_point(List<Point> points){
+		Iterator<Point> it = points.iterator();
+		while(it.hasNext()){
+			Point point = it.next();
+			System.out.println("index = " + point.getIndex() + " , x = " + point.getX() + " , y = " + point.getY());
+		}
+	}
+}

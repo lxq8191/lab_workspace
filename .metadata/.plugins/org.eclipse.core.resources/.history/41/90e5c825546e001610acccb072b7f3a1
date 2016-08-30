@@ -1,0 +1,24 @@
+package com.test;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
+public class Solution171 {
+	Map<String, Integer> map = new HashMap<String, Integer>();
+	String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	public static int titleToNumber(String s) {
+		for (int i = 1; i <= 26; i++) {
+			map.put(str.charAt(i-1)+"", i);
+		}
+		for (Entry<String, Integer> entry : map.entrySet()) {
+			   System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+			  }
+		return 0;
+        
+    }
+	public static void main(String[] args) {
+		titleToNumber("");
+	}
+}

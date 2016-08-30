@@ -1,0 +1,18 @@
+package com.test;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+public class Solution171 {
+	Map<String, Integer> map = new HashMap<String, Integer>();
+	String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	public int titleToNumber(String s) {
+		for (int i = 1; i <= 26; i++) {
+			map.put(str.charAt(i-1)+"", i);
+		}
+		
+		return 0;
+        
+    }
+}

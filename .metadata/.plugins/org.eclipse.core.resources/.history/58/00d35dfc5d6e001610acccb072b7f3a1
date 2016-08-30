@@ -1,0 +1,29 @@
+package com.test;
+
+import java.util.regex.Pattern;
+
+public class Solution326 {
+	public static boolean isPowerOfThree(int n) {
+        if(n<=0) return false;
+		if(n==1) return true;
+		double sum = Math.log(n)/Math.log(3);
+		String s = sum +"";
+		System.out.println(s);
+		String[] sArr = s.split(".");
+		System.out.println(sArr[0]);
+		if(sArr[1].equals("0")){
+			return true;
+		}else {
+			return false;
+		}
+    }
+	
+	public static void main(String[] args) {
+		System.out.println(isPowerOfThree(9));
+		System.out.println(Math.log(81)/Math.log(3));
+		Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");  
+		if(pattern.matcher(Math.log(81)/Math.log(3)+"").matches()){
+			System.out.println("true");
+		}
+	}
+}

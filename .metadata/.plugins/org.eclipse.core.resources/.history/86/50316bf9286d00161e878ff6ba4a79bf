@@ -1,0 +1,22 @@
+package com.test;
+
+import java.util.Arrays;
+
+public class Solution1 {
+	public int[] twoSum(int[] nums, int target) {
+		int[] result = new int[2];
+		int head = 0,tail = nums.length-1;
+		Arrays.sort(nums);
+		for(;head <= tail&&tail > 0;){
+			if(nums[head]+nums[tail]==target){
+				break;
+			}else if(nums[head]+nums[tail]>target){
+				tail--;
+			}else if(nums[head]+nums[tail]<target){
+				head++;
+			}
+			
+		}
+		return result;
+    }
+}

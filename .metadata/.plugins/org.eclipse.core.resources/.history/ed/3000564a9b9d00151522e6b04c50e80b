@@ -1,0 +1,127 @@
+package compare.TEST;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import tools.loadData.InputData;
+import trajectory.construct.Point;
+
+public class Main {
+	private static final int W = 500;
+	public  static double[][] error_table;
+	public static  double min_error;
+	public static List<List<Integer>> Traje = new ArrayList<>();
+	public static List<Double> errorList = new ArrayList<>();
+	
+	public static void main(String[] args) {
+		long start =  System.currentTimeMillis();
+		
+		String file = "./data/1000.plt";
+		List<Point> points = InputData.input_file(file, 0);
+		String file2 = "f:/gnu/test/raw.txt";
+		InputData.output_file(file2, points);
+		SP sp = new SP();
+		error_table = sp.constructTable(points);
+//		sp.showTable(error_table);
+		
+		//Set<Double> set=new HashSet<Double>();
+//		//输出误差set内容--start
+//		for( Iterator<Double>   it = sp.set.iterator(); it.hasNext(); )
+//	    {             
+//	         System.out.println(it.next()+" ");
+//	    }
+		System.out.println("size="+ sp.set.size() );
+//		//输出误差set内容--end
+		 for( Iterator<Double>   it1 = sp.set.iterator(); it1.hasNext(); )
+		    {             
+		         min_error = it1.next();
+		         Graph graph=new Graph();
+		         	//添加边
+					for (int i = 0; i < points.size()-1; i++) {
+						for (int j = i+1; j < points.size(); j++) {
+							if(error_table[i][j] <= min_error){
+								graph.addEdge(i, j);
+							}
+						}
+					}
+					
+					graph.unweighted(0);
+//					System.out.println("The shortest path from 0:");
+					graph.printPath(points.size()-1);
+					
+//					System.out.println("Error = "+graph.calError(error_table));
+//					System.out.println("Path Length = "+graph.result.size());
+					if(graph.result.size() <= W)
+					{
+						Traje.add(graph.result);
+						errorList.add(graph.calError(error_table));
+					}
+					//graph.result.clear();
+		    }
+//		 	Iterator<Double> iter1 = errorList.iterator();  
+//         
+//	        while(iter1.hasNext())  
+//	        {  
+//	            System.out.print(" "+iter1.next());  
+//	        }  
+//	        System.out.println();
+		 	
+		 	//找到误差最小的那条路径
+		    int temp = 0;
+		    double error = errorList.get(0);
+			for (int i = 1; i < errorList.size(); i++) {
+				if(error > errorList.get(i)){
+					error = errorList.get(i);
+					temp = i;
+				}
+			}
+			//输出目标路径--start
+			Iterator<Integer> iter = Traje.get(temp).iterator();  
+	          
+	        while(iter.hasNext())  
+	        {  
+	            System.out.print(" "+iter.next());  
+	        }  
+	        System.out.println();
+	      //输出目标路径--end
+		 	long end = System.currentTimeMillis();
+		 	
+			System.out.println("running time is " + (end - start) + "ms");
+			String file1 = "f:/gnu/test/result.txt";
+			List<Point> list_points = new ArrayList<>();
+			Iterator<Integer> iter2 = Traje.get(temp).iterator();
+			while(iter2.hasNext())  
+		        {  
+		            list_points.add(points.get(iter2.next()));
+		        }  
+			InputData.output_file(file1, list_points);
+		
+//		Graph graph=new Graph();
+//		
+//		long start =  System.currentTimeMillis();
+//		
+//		for (int i = 0; i < points.size()-1; i++) {
+//			for (int j = i+1; j < points.size(); j++) {
+//				if(error_table[i][j] < min_error){
+//					graph.addEdge(i, j);
+//				}
+//			}
+//		}
+//		
+//		
+//		
+//		graph.unweighted(0);
+//		System.out.println("The shortest path from 0:");
+//		graph.printPath(points.size()-1);
+//		
+//		long end = System.currentTimeMillis();
+//		System.out.println("running time is " + (end - start) + "ms");
+//		
+//		System.out.println("Error = "+graph.calError(error_table));
+//		System.out.println("Path Length = "+graph.result.size());
+		
+	}
+}

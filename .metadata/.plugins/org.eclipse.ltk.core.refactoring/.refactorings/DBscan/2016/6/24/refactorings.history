@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;points.txt&apos; to &apos;Taxi_BeiJing/src/com.dbscan.beijing&apos;&#x0D;&#x0A;- Original project: &apos;DBscan&apos;&#x0D;&#x0A;- Destination element: &apos;Taxi_BeiJing/src/com.dbscan.beijing&apos;&#x0D;&#x0A;- Original element: &apos;points.txt&apos;" description="Copy file" destination="=Taxi_BeiJing/src&lt;com.dbscan.beijing" element1="src/dbscan/points.txt" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1465344174512" units="0" version="1.0"/>
+</session>

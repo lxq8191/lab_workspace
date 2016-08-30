@@ -1,0 +1,39 @@
+package com.taxi.test;
+
+import java.util.ArrayList;
+
+public class Distance {
+
+	public static void main(String[] args) {
+		//方法一：
+		double p,q,p1,q1,R,s; 
+		R=6370996.81;
+		double aa=31.176* Math.PI / 180.0;
+		double bb=31.2505* Math.PI / 180.0;
+		p=aa-bb;
+		q=(121.489-121.4498)* Math.PI / 180.0;
+		p1=Math.sin(p / 2.0);
+		q1=Math.sin(q / 2.0);
+		s=2*R* Math.asin(Math.sqrt(p1 * p1 + Math.cos(p)* Math.cos(q) * q1 * q1));
+		System.out.println(s);
+		
+		//方法二：
+		double l = R*Math.acos(Math.cos(31.1728* Math.PI/180 )*Math.cos(31.176* Math.PI/180)*Math.cos(121.4788* Math.PI/180 -121.489* Math.PI/180)+
+				Math.sin(31.1728* Math.PI/180 )*Math.sin(31.176* Math.PI/180));
+		System.out.println(l);
+		
+		//方法三：
+		double lat1 = (Math.PI/180)*30.5086;  
+	    double lat2 = (Math.PI/180)*30.5086;	          
+	    double lon1 = (Math.PI/180)*120.6645;  
+	    double lon2 = (Math.PI/180)*120.6646;  
+	          
+	    //地球半径  
+	    double R1 = 6371;  
+	          
+	    //两点间距离 km，如果想要米的话，结果*1000就可以了  
+	    double d =  Math.acos(Math.sin(lat1)*Math.sin(lat2)+Math.cos(lat1)*Math.cos(lat2)*Math.cos(lon2-lon1))*R1;  	          
+	    System.out.println( d*1000);  
+	}
+	
+}

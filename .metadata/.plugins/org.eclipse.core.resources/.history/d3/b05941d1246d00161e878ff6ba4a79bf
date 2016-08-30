@@ -1,0 +1,19 @@
+package com.test;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class Solution22 {
+	Set<String> tempSet = new HashSet<String>();
+	  public List<String> generateParenthesis(int n) {
+		  List<String> result = new ArrayList<String>();
+		  if(n==0){
+			  return list;
+		  }
+		  list.add("()");
+		  
+		  return null;
+	  }
+}

@@ -1,0 +1,63 @@
+package compare.TEST.practical;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import tools.loadData.InputData;
+import trajectory.construct.Point;
+
+public class Main {
+	public  static double[][] error_table;
+	public static  double min_error = 0.5;
+	public static List<List<Integer>> Traje = new ArrayList<>();
+	public static List<Double> errorList = new ArrayList<>();
+	
+	public static void main(String[] args) {
+		long start =  System.currentTimeMillis();
+		
+		String file = "./data/1131.txt";
+		List<Point> points = InputData.input_file(file, 1);
+		String file2 = "f:/gnu/test/raw.txt";
+		InputData.output_file(file2, points);
+		SP sp = new SP();
+		error_table = sp.constructTable(points);
+		int[][] res = new  int[points.size()][points.size()];
+		         Graph graph=new Graph();
+					for (int i = 0; i < points.size()-1; i++) {
+						for (int j = i+1; j < points.size(); j++) {
+							if(error_table[i][j] <= min_error){
+								graph.addEdge(i, j);
+							}
+						}
+					}
+					
+					graph.unweighted(0);
+//					System.out.println("The shortest path from 0:");
+					graph.printPath(points.size()-1);
+					
+					System.out.println("Error = "+graph.calError(error_table));
+					System.out.println("Path Length = "+graph.result.size());
+					
+					long end = System.currentTimeMillis();
+					System.out.println("running time is " + (end - start) + "ms");
+					
+					Iterator<Integer> iter1 = graph.result.iterator();
+					while(iter1.hasNext())  
+				        {  
+				            System.out.print(" "+iter1.next());  
+				        }  
+					System.out.println();
+					
+					String file1 = "f:/gnu/test/result.txt";
+					List<Point> list_points = new ArrayList<>();
+					Iterator<Integer> iter2 = graph.result.iterator();
+					while(iter2.hasNext())  
+				        {  
+				            list_points.add(points.get(iter2.next()));
+				        }  
+					InputData.output_file(file1, list_points);
+	}
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Point.java&apos; to &apos;TaxiAppV4/src/com.nhpp&apos;&#x0D;&#x0A;- Original project: &apos;TaxiAppV1&apos;&#x0D;&#x0A;- Destination element: &apos;TaxiAppV4/src/com.nhpp&apos;&#x0D;&#x0A;- Original element: &apos;com.taxi.test.Point.java&apos;" description="Copy compilation unit" destination="=TaxiAppV4/src&lt;com.nhpp" element1="/src&lt;com.taxi.test{Point.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1460444111158" units="1" version="1.0"/>
+</session>

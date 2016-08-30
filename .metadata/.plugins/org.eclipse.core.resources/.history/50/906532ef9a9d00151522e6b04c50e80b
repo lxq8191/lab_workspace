@@ -1,0 +1,100 @@
+package compare.TEST;
+
+import java.text.NumberFormat;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import tools.loadData.InputData;
+import trajectory.construct.*;
+import basic.error.*;
+public class SP {
+	private static double r = 1;
+	public  static double[][] error_table;
+	public  static Set<Double> set=new HashSet<Double>();
+	
+    public  double[][] constructTable(List<Point> points){
+    	Runtime run = Runtime.getRuntime();
+    	
+		int n = points.size();
+		double table[][] = new double[n][n];
+		int num = points.size();
+		
+		NumberFormat nFormat=NumberFormat.getNumberInstance(); 
+    	nFormat.setMaximumFractionDigits(2);//设置小数点后面位数为
+		for (int i = 0; i < table.length; i++) {
+			for (int j = 0; j < table[i].length; j++) {
+				table[i][j] = 0;
+			}
+		}
+		
+		for (int i = 0; i < num - 1; i++) {
+			Point p1 = points.get(i);
+			for (int j = i + 1; j < ((num * r + i + 1) < num ? (num * r + i) : num ); j++) {
+				Point p2 = points.get(j);
+				table[i][j] = SegmentError.computeError(p1, p2, points); 
+				set.add(Double.parseDouble(nFormat.format(table[i][j])));
+			}
+		}
+		System.out.println("table memory = " + run.totalMemory()/1024.0/1024.0);
+		return table;
+	}
+    public void showTable(double[][] table){
+    	for (int i = 0; i < table.length; i++) {
+			for (int j = 0; j < table[i].length; j++) {
+				System.out.printf("%f " , table[i][j]);
+				
+			}
+			System.out.println();
+		}
+    }
+    public double m2(double f) {
+    	
+    	NumberFormat nFormat=NumberFormat.getNumberInstance(); 
+    	nFormat.setMaximumFractionDigits(2);//设置小数点后面位数为
+    	return Double.parseDouble(nFormat.format(f));
+//        DecimalFormat df = new DecimalFormat("#.00");
+        //System.out.println(df.format(f));
+//        return df.format(f);
+    }
+    
+    
+    public static void main(String[] args) {
+		String file = "./data/test.txt";
+//    	String file = args[0];
+//    	r = Double.parseDouble(args[1]);
+//    	int flag = Integer.parseInt(args[2]);
+		List<Point> points = InputData.input_file(file, 0);
+		
+		long start = System.currentTimeMillis();
+
+		SP sp = new SP();
+		error_table = sp.constructTable(points);
+		sp.showTable(error_table);
+		
+		
+		int num = points.size();
+		int[] vexs = new int[num];
+		for (int i = 0; i < num; i++) {
+			vexs[i] = points.get(i).getIndex();
+		}
+//		int[][] edges = Graph.createArray(points);
+//		
+//		Graph g = new Graph(vexs, edges, error_table, 5);
+		
+//		g.print();
+//      g.DFS();     // 深度优先遍历
+//		List<Integer> result = g.BFS(points);     // 广度优先遍历
+		int count = 0;
+//		for (Iterator it = result.iterator(); it.hasNext();) {
+//			Integer integer = (Integer) it.next();
+//			System.out.print(integer+" ");
+//			if(count++ % 10 == 0){
+//				System.out.println();
+//			}
+//		}
+		
+		long end = System.currentTimeMillis();
+		System.out.println("\ntime = " + (end - start));
+    }
+}

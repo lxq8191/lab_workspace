@@ -1,0 +1,13 @@
+package com.test;
+
+public class Solution326 {
+	public boolean isPowerOfThree(int n) {
+        if(n<=0) return false;
+		if(n==1) return true;
+		if(Math.cbrt(n) instanceof Integer){
+			return 
+		}
+		return true;
+    }
+	
+}

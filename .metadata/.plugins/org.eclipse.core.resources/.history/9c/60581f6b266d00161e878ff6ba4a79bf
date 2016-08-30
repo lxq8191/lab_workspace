@@ -1,0 +1,9 @@
+package com.test;
+
+public class Solution1 {
+	public class Solution {
+	    public int[] twoSum(int[] nums, int target) {
+	        
+	    }
+	}
+}

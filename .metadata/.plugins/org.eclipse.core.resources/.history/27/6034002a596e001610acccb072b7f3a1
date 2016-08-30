@@ -1,0 +1,16 @@
+package com.test;
+
+import java.util.regex.Pattern;
+
+public class Solution326 {
+	public boolean isPowerOfThree(int n) {
+        if(n<=0) return false;
+		if(n==1) return true;
+		Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");  
+		if(pattern.matcher(Math.cbrt(n)+"").matches()){
+			return true;
+		}
+		return true;
+    }
+	
+}

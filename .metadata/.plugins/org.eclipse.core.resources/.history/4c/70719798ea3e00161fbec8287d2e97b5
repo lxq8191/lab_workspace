@@ -1,0 +1,12 @@
+package com.test;
+
+import java.util.logging.Logger;
+
+public class Test_201607010916 {
+	
+	public static void main(String[] args) {
+		int pos = 1000;
+		Logger.global.info("C "+ pos);
+	}
+
+}

@@ -1,0 +1,12 @@
+package com.test;
+
+import java.util.Map;
+
+public class Solution171 {
+	Map<String, Integer> map = new Map<String, Integer>();
+	
+	public int titleToNumber(String s) {
+		return 0;
+        
+    }
+}

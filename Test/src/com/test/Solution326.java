@@ -1,0 +1,20 @@
+package com.test;
+
+public class Solution326 {
+	public static boolean isPowerOfThree(int n) {
+        if(n<=0) return false;
+		if(n==1) return true;
+		double sum = Math.log(n)/Math.log(3);
+		System.out.println(sum);
+		String s = sum +"";
+		if(s.substring(s.indexOf(".")+1, s.length()).equals("0")){
+			return true;
+		}else {
+			return false;
+		}
+    }
+	
+	public static void main(String[] args) {
+		System.out.println(isPowerOfThree(243));
+	}
+}
